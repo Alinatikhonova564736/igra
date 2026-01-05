@@ -2,9 +2,9 @@ import random
 import time
 
 class Move: #Класс ход
-    ROCK = "камень"
-    SCISSORS = "ножницы"
-    PAPER = "бумага"
+    ROCK: str = "камень"
+    SCISSORS: str = "ножницы"
+    PAPER: str = "бумага"
 
     ALL_MOVES = [ROCK, SCISSORS, PAPER]
 
@@ -16,34 +16,34 @@ class Move: #Класс ход
 
 class Player: #Класс игрок
 
-    def __init__(self, name):
-        self.name = name
-        self.score = 0
+    def __init__(self, name) -> None:
+        self.name: str = name
+        self.score: int = 0
 
-    def add_score(self, points=1): #Добавляем очки игрокам
+    def add_score(self, points=1) -> None: #Добавляем очки игрокам
         self.score += points
 
-    def reset(self): #Сброс статистики игрокам
+    def reset(self)-> None: #Сброс статистики игрокам
         self.score = 0
 
 class ComputerPlayer(Player): #Класс игрок - компьютер
 
-    def __init__(self, name="Компьютер"):
+    def __init__(self, name="Компьютер") -> None:
         super().__init__(name)
 
-    def make_move(self): # Делаем случайный ход
+    def make_move(self) -> str: # Делаем случайный ход
         return random.choice(Move.ALL_MOVES)
 
 
 class Game: #Класс самой игры
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.human = Player("Игрок")
         self.computer = ComputerPlayer()
         self.rounds_played = 0
         self.max_rounds = None
 
-    def determine_winner(self, human_move, computer_move): #Определяем кто победил
+    def determine_winner(self, human_move, computer_move) -> str: #Определяем кто победил
         if human_move == computer_move:
             return "draw"
 
@@ -78,7 +78,7 @@ class Game: #Класс самой игры
         }
         return texts.get(result, "")
 
-    def show_help(self): #Cправка по игре
+    def show_help(self) -> None: #Cправка по игре
         print("\n" + "=" * 50)
         print("ПРАВИЛА ИГРЫ 'КАМЕНЬ-НОЖНИЦЫ-БУМАГА':")
         print("=" * 50)
@@ -93,13 +93,13 @@ class Game: #Класс самой игры
         print(" выход - закончить игру")
         print("=" * 50)
 
-    def reset_game(self): #Сброс игры
+    def reset_game(self) -> None: #Сброс игры
         self.human.reset()
         self.computer.reset()
         self.rounds_played = 0
         print("\n✓ Игра сброшена! Начинаем заново!")
 
-    def play(self): # Основной игровой цикл
+    def play(self) -> None: # Основной игровой цикл
         print("=" * 50)
         print("ДОБРО ПОЖАЛОВАТЬ В ИГРУ 'КАМЕНЬ-НОЖНИЦЫ-БУМАГА'!")
         print("=" * 50)
@@ -159,12 +159,12 @@ class Game: #Класс самой игры
 class TournamentGame(Game): #Класс для турнирной игры
 
 
-    def __init__(self, rounds=5):
+    def __init__(self, rounds: int = 5) -> None:
         super().__init__()
         self.max_rounds = rounds
         self.target_score = (rounds // 2) + 1
 
-    def play(self): #Игра с фиксированным количеством раундов
+    def play(self) -> None: #Игра с фиксированным количеством раундов
         print("=" * 50)
         print(f"ТУРНИР ДО {self.max_rounds} РАУНДОВ!")
         print(f"Для победы нужно набрать {self.target_score} очков!")
@@ -226,7 +226,7 @@ class TournamentGame(Game): #Класс для турнирной игры
                 print(" Неизвестная команда. Введите камень, ножницы или бумагу")
 
 
-def main(): #Главная функция
+def main() -> None: #Главная функция
     print("=" * 50)
     print(" ВЫБЕРИТЕ РЕЖИМ ИГРЫ:")
     print("=" * 50)
@@ -254,3 +254,4 @@ def main(): #Главная функция
 
 if __name__ == "__main__":
     main()
+
